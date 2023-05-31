@@ -14,4 +14,20 @@ router.get("/", (req, res) => {
   res.json(videos);
 });
 
+
+// Get single video
+router.get("/:id", (req, res)=> {
+    const specificVideo = videoData.find((video)=> {
+      return  video.id === req.params.id
+    });
+
+    if(!specificVideo) {
+        res.status(404).send("Video is not found");
+    }
+
+    res.json(specificVideo);
+})
+
+
+
 module.exports = router;

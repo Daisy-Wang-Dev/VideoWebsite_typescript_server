@@ -1,5 +1,5 @@
 require("dotenv").config();
-const express=require("express");
+const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4040;
 const videoRoute = require("./routes/videos");
@@ -11,6 +11,5 @@ app.use(express.static("public"));
 app.use("/videos", videoRoute);
 
 app.listen(PORT, () => {
-    console.log("Server has started on port " + PORT);
-  });
-
+  console.log("Server has started on port " + PORT);
+});

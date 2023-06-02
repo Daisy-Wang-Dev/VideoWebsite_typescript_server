@@ -39,7 +39,7 @@ router.post("/", (req, res) => {
     title: title,
     description: description,
     channel: "Daisy Wang",
-    image: "../public/Upload-video-preview.jpg",
+    image: "http://localhost:8080/Upload-video-preview.jpg",
     views: "2,001,023",
     likes: "210,985",
     timestamp: new Date(),

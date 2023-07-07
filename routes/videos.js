@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
   const { title, description } = req.body;
 
   if (!title || !description) {
-    res.status(400).send("Please fill in all fields");
+    return res.status(400).send("Please fill in all fields");
   }
 
   const newVideo = {
@@ -39,7 +39,7 @@ router.post("/", (req, res) => {
     title: title,
     description: description,
     channel: "Daisy Wang",
-    image: "http://localhost:8080/Upload-video-preview.jpg",
+    image: "http://localhost:3030/Upload-video-preview.jpg",
     views: "2,001,023",
     likes: "210,985",
     timestamp: new Date(),

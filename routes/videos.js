@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
     const { id, channel, title, image } = video;
     return { id: id, channel: channel, title: title, image: image };
   });
-  res.json(videos);
+  res.status(200).json(videos);
 });
 
 // Get single video
@@ -23,10 +23,11 @@ router.get("/:id", (req, res) => {
     res.status(404).send("Video is not found");
   }
 
-  res.json(specificVideo);
+  res.status(200).json(specificVideo);
 });
 
 // Post a new video
+
 router.post("/", (req, res) => {
   const { title, description } = req.body;
 

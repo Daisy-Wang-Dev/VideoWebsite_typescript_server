@@ -2,7 +2,8 @@ import { Router, Request, Response } from "express";
 import crypto from "crypto";
 
 const router: Router = Router();
-const videoData = require("../data/videos.json");
+// const videoData = require("../data/videos.json");
+import videoData from "../data/videos.json";
 
 // Get all videos
 interface Video {
@@ -54,6 +55,26 @@ interface Body {
   description: string;
 }
 
+interface newVideo {
+  id: `${string}-${string}-${string}-${string}-${string}`;
+  title: string;
+  description: string;
+  channel: string;
+  image: string;
+  views: string;
+  likes: string;
+  timestamp: number;
+  duration: string;
+  video: string;
+  comments: {
+    id: string;
+    name: string;
+    comment: string;
+    likes: number;
+    timestamp: number;
+  }[];
+}
+
 router.post("/", async (req: Request, res: Response) => {
   try {
     const { title, description }: Body = req.body;
@@ -62,15 +83,17 @@ router.post("/", async (req: Request, res: Response) => {
       return res.status(400).send("Please fill in all fields");
     }
 
-    const newVideo = {
-      id: crypto.randomUUID(),
+    const newVideo: newVideo = {
+      id: `${crypto.randomUUID()}`,
       title: title,
       description: description,
       channel: "Daisy Wang",
       image: "http://localhost:3030/Upload-video-preview.jpg",
       views: "2,001,023",
       likes: "210,985",
-      timestamp: new Date(),
+      timestamp: new Date().getTime(),
+      duration: "4:01",
+      video: "https://project-2-api.herokuapp.com/stream",
       comments: [
         {
           id: "35bba08b-1b51-4153-ba7e-6da76b5ec1b9",

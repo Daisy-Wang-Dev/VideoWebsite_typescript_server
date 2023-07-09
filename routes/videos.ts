@@ -2,7 +2,6 @@ import { Router, Request, Response } from "express";
 import crypto from "crypto";
 
 const router: Router = Router();
-// const videoData = require("../data/videos.json");
 import videoData from "../data/videos.json";
 
 // Get all videos

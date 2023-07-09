@@ -15,10 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const crypto_1 = __importDefault(require("crypto"));
 const router = (0, express_1.Router)();
-const videoData = require("../data/videos.json");
+const videos_json_1 = __importDefault(require("../data/videos.json"));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const videos = videoData.map((video) => {
+        const videos = videos_json_1.default.map((video) => {
             const { id, channel, title, image } = video;
             return { id: id, channel: channel, title: title, image: image };
         });
@@ -35,7 +35,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 // Get single video
 router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const specificVideo = videoData.find((video) => {
+        const specificVideo = videos_json_1.default.find((video) => {
             return video.id === req.params.id;
         });
         if (!specificVideo) {
@@ -58,14 +58,16 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(400).send("Please fill in all fields");
         }
         const newVideo = {
-            id: crypto_1.default.randomUUID(),
+            id: `${crypto_1.default.randomUUID()}`,
             title: title,
             description: description,
             channel: "Daisy Wang",
             image: "http://localhost:3030/Upload-video-preview.jpg",
             views: "2,001,023",
             likes: "210,985",
-            timestamp: new Date(),
+            timestamp: new Date().getTime(),
+            duration: "4:01",
+            video: "https://project-2-api.herokuapp.com/stream",
             comments: [
                 {
                     id: "35bba08b-1b51-4153-ba7e-6da76b5ec1b9",
@@ -83,7 +85,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 },
             ],
         };
-        videoData.push(newVideo);
+        videos_json_1.default.push(newVideo);
         res.status(201).json(newVideo);
     }
     catch (err) {
